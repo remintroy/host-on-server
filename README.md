@@ -1,5 +1,5 @@
 # host-on-server
-This is a smile solution for saving time while hosting the MERN app on AWS or any other ubuntu22.04 instance
+This is a simple solution for saving time while hosting the MERN app on AWS or any other ubuntu22.04 instance
 
 ### Working
 * Update and upgrade apt
