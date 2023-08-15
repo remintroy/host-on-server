@@ -10,6 +10,9 @@ This is a simple solution for saving time while hosting the MERN app on AWS or a
 * Install MongoDB
 * Yay your server is all set for further hosting configurations
 
+### Switches
+* `-y` : all yes
+
 ### How to use it?
 ```bash
 git clone https://github.com/remintroy/host-on-server.git
@@ -19,11 +22,5 @@ cd host-on-server
 ```
 ```bash
 sudo ./setup_server.sh
-```
-
-Switches
-* `-y` : all yes
-```bash
-sudo ./setup_server.sh -y
-```
+``` 
 Thats it! Good luck and stay creative
