@@ -18,7 +18,7 @@ git clone https://github.com/remintroy/host-on-server.git
 cd host-on-server
 ```
 ```bash
-./setup_server.sh
+sudo ./setup_server.sh
 ```
 
 Thats it! Good luck and stay creative
