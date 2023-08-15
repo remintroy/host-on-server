@@ -21,4 +21,9 @@ cd host-on-server
 sudo ./setup_server.sh
 ```
 
+Switches
+* `-y` : all yes
+```bash
+sudo ./setup_server.sh -y
+```
 Thats it! Good luck and stay creative
