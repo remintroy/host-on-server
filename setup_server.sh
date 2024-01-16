@@ -52,8 +52,7 @@ new_task() {
     if [ "$message_title" ]; then echo $message_title; fi
 }
 
-check_and_install_librarys() {
-    # checks npm
+install_npm() {
     if [ $(which npm) ]; then echo "> npm version $(npm -v)"; else
         ask_permission "Npm is not installed do you want to install npm"
         if [ "$permission" ]; then
@@ -70,8 +69,9 @@ check_and_install_librarys() {
             n stable
         fi
     fi
+}
 
-    # checks node
+install_node() {
     if [ $(which node) ]; then echo "> node version $(node -v)"; else
         ask_permission "Node is not installed do you want to install node"
         if [ "$permission" ]; then
@@ -80,8 +80,9 @@ check_and_install_librarys() {
             apt install nodejs -y
         fi
     fi
+}
 
-    # checks pnpm
+install_pnpm() {
     if [ $(which pnpm) ]; then echo "> pnpm version $(pnpm -v)"; else
         if [ $(which npm) ]; then
             ask_permission "Pnpm is not installed do you want to install pnpm"
@@ -94,7 +95,25 @@ check_and_install_librarys() {
             fi
         fi
     fi
+}
 
+install_pm2() {
+    if [ $(which pm2) ]; then echo "> pm2 version $(pm2 -v)"; else
+        ask_permission  "pm2 is not installed do you want to install pm2"
+        if [ $(which npm) ]; then 
+            if [ "$permission" ]; then
+                new_task "> Installing pm2..."
+                # 1
+                $(which npm) install pm2 -g
+            fi
+        else
+           install_npm
+           if [ $(which npm) ]; then  $(which npm) install pm2 -g; fi
+        fi
+    fi
+}
+
+install_nginx() {
     if [ $(which nginx) ]; then echo "> nginx version ^ $(nginx -v)"; else
         ask_permission "Nginx is not installed do you want to install nginx"
         if [ "$permission" ]; then
@@ -103,7 +122,9 @@ check_and_install_librarys() {
             apt install nginx -y
         fi
     fi
+}
 
+install_mongodb() {
     if [ $(which mongod) ]; then echo "> mongodb version $(mongod --version)"; else
         ask_permission "Mongodb is not installed do you want to install mongodb"
         if [ "$permission" ]; then
@@ -137,14 +158,22 @@ check_and_install_librarys() {
     fi
 }
 
+update_and_upgrade_packages() {
+    ask_permission "Do you want to update and upgrade packages"
+
+    if [ "$permission" ]; then
+        apt update -y && apt upgrade -y && apt dist-upgrade -y
+    fi
+}
+
 # Real execution starts below
 new_task
-ask_permission "Do you want to update and upgrade packages"
-
-if [ "$permission" ]; then
-    apt update -y && apt upgrade -y && apt dist-upgrade -y
-fi
-
-check_and_install_librarys # npm, node, pnpm
+update_and_upgrade_packages
+install_npm
+install_node
+install_pm2
+install_pnpm
+install_nginx
+install_mongodb
 
 echo "> You are all set !"
