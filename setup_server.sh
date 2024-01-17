@@ -124,6 +124,17 @@ install_nginx() {
     fi
 }
 
+install_redis() {
+    if [ $(which redis-server) ]; then echo "> redis version $(redis-server -v)"; else
+        ask_permission "Redis is not installed do you want to install redis"
+        if [ "$permission" ]; then
+            new_task "> Installing redis..."
+            # 1
+            apt install redis-server -y
+        fi
+    fi 
+}
+
 install_mongodb() {
     if [ $(which mongod) ]; then echo "> mongodb version $(mongod --version)"; else
         ask_permission "Mongodb is not installed do you want to install mongodb"
@@ -175,5 +186,6 @@ install_pm2
 install_pnpm
 install_nginx
 install_mongodb
+install_redis
 
 echo "> You are all set !"

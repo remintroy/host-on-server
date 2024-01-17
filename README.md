@@ -7,10 +7,11 @@ This is a simple solution for saving time while hosting the MERN app on AWS or a
 * Update and upgrade apt
 * Install npm
 * Install and update node
-* install pm2
+* Install pm2
 * Install pnpm
 * Install nginx
 * Install MongoDB
+* Install Redis
 * Yay your server is all set for further hosting configurations
 
 ### Switches
